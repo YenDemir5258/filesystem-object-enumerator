@@ -22,3 +22,10 @@ The trade-off: the result is a concrete `list`, not a lazy iterator. If your tre
 - Symlinks are stat-resolved (`follow_symlinks=True`): a link to a directory reports as `directory`, a link to a file as `file` with the referent's size. A broken link reports as `broken_link` with `size == -1`.
 - Directories report their own `st_size` as reported by the OS (commonly 0 or a small block size on Unix, varies by filesystem). Don't use directory sizes to mean "sum of contents" — that's a different operation.
 - If a directory becomes unreadable between discovery and traversal, it is skipped rather than raising. The enumeration never aborts mid-tree.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
