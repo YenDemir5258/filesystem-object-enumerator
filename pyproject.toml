@@ -1,6 +1,6 @@
 [project]
 name = "filesystem-object-enumerator"
-version = "0.1.0"
+version = "0.1.1"
 description = "Walks a directory tree once, yielding each entry's absolute path, relative path, kind, and size."
 requires-python = ">=3.10"
 dependencies = []
